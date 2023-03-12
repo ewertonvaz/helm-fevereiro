@@ -28,7 +28,10 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext: {
+  runAsUser: 1000,
+  runAsGroup: 1000
+}
   # capabilities:
   #   drop:
   #   - ALL
@@ -89,3 +92,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+configMap:
+  name: "theiaide-volume"
+  create: true
+  data:
+    mountPath: /home/project

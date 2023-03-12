@@ -1,0 +1,12 @@
+{{- if .Values.configMap.create }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMap.name | default (include "theia.fullname" .) }}
+  labels:
+    {{- include "theia.labels" . | nindent 4 }}
+{{- with .Values.configMap.data }}
+data:
+ {{- toYaml . | nindent 2 }}
+{{- end }}
+{{- end }}
