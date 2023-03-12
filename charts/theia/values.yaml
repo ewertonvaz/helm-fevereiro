@@ -98,3 +98,4 @@ configMap:
   create: true
   data:
     mountPath: /home/project
+    storageSize: 1Gi
