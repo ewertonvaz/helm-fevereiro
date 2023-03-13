@@ -107,7 +107,7 @@ ingress:
   hosts: [
     {
       #host: ewerton.fevereiro.jac.bsb.br,
-      host: ewertonvaz.test,
+      host: ewertonvaz.fevereiro.jac.bsb.br,
       paths: [
       {
         path: /,
