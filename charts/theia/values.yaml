@@ -30,7 +30,8 @@ podSecurityContext: {}
 
 securityContext: {
   runAsUser: 1000,
-  runAsGroup: 1000
+  runAsGroup: 1000,
+  fsGroup: 1000
 }
   # capabilities:
   #   drop:
@@ -99,3 +100,19 @@ configMap:
   data:
     mountPath: /home/project
     storageSize: 1Gi
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts: [
+    {
+      #host: ewerton.fevereiro.jac.bsb.br,
+      host: ewertonvaz.test,
+      paths: [
+      {
+        path: /,
+        pathType: Prefix
+      }
+      ]
+    }
+  ]

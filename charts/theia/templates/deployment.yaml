@@ -26,17 +26,22 @@ spec:
       {{- end }}
       serviceAccountName: {{ include "theia.serviceAccountName" . }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.securityContext | nindent 8 }}
+      volumes:
+      - name: theiaide-volume
+        persistentVolumeClaim:
+          claimName: theia-volume
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+        - name: {{ .Chart.Name }}           
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.service.targetPort }}
               protocol: TCP
+          volumeMounts:
+          - mountPath: {{ .Values.configMap.data.mountPath }}
+            name: theiaide-volume
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}

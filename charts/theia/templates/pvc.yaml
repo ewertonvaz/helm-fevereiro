@@ -9,5 +9,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage:
-        {{- toYaml .Values.configMap.storageSize | "1Gi" }}
+      storage: {{ .Values.configMap.data.storageSize }}
